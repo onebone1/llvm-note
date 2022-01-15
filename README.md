@@ -33,8 +33,10 @@ int main() {
 ```
 ### test
 ```bash
-clang -S -emit-llvm main.c
+clang -O3 -Xclang -disable-llvm-passes -S -emit-llvm main.c -o main.ll
+opt -S -mem2reg -instnamer main.ll -o main_after_opt.ll
 lli main.ll
+lli main_after_opt.ll
 ```
 
 ### compile
